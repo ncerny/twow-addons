@@ -1,7 +1,7 @@
 ## Interface: 11200
-## Title: 1701_Mounts
+## Title: 1701 Addons - Mounts
 ## Notes: Random mount selector with optional keyword filtering
 ## Author: Claude
 ## Version: 1.0.0
 
-1701_Mounts.lua
+Mounts.lua

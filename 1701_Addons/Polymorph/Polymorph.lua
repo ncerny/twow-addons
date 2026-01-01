@@ -1,5 +1,5 @@
 --[[
-    1701_Polymorph - Smart Polymorph Addon for WoW 1.12
+    Polymorph - Smart Polymorph Addon for WoW 1.12
 
     Usage: /poly
 

@@ -1,7 +1,7 @@
 ## Interface: 11200
-## Title: 1701_Polymorph
+## Title: 1701 Addons - Polymorph
 ## Notes: Smart Polymorph addon - polymorphs attackable raid/party members (MC'd players) or random polymorph on target
 ## Author: Claude
 ## Version: 1.2.0
 
-1701_Polymorph.lua
+Polymorph.lua
