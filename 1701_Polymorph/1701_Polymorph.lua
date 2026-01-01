@@ -1,7 +1,7 @@
 --[[
     1701_Polymorph - Smart Polymorph Addon for WoW 1.12
 
-    Usage: /polymc or /polymorphmacro
+    Usage: /poly
 
     Behavior:
     1. Scans raid/party for attackable members (mind-controlled players)
@@ -170,9 +170,8 @@ local frame = CreateFrame("Frame")
 frame:RegisterEvent("VARIABLES_LOADED")
 frame:SetScript("OnEvent", function()
     -- Register slash commands on VARIABLES_LOADED to ensure proper initialization
-    SLASH_POLYMORPHMACRO1 = "/polymorphmacro"
-    SLASH_POLYMORPHMACRO2 = "/polymc"
-    SlashCmdList["POLYMORPHMACRO"] = SlashCmdHandler
+    SLASH_POLYMORPH17011 = "/poly"
+    SlashCmdList["POLYMORPH1701"] = SlashCmdHandler
 end)
 
 -- Export for external use
