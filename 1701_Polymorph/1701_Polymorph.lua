@@ -1,15 +1,15 @@
 --[[
-    PolymorphMacro - Smart Polymorph Addon for WoW 1.12
+    1701_Polymorph - Smart Polymorph Addon for WoW 1.12
 
     Usage: /polymc or /polymorphmacro
 
     Behavior:
     1. Scans raid/party for attackable members (mind-controlled players)
-    2. If found, polymorphs them and announces to raid/party
+    2. If found, polymorphs them and announces to raid/party/say
     3. If no attackable members, casts random polymorph on current target
 ]]
 
-PolymorphMacro = {}
+Polymorph1701 = {}
 
 -- Polymorph spell variants (will check which ones the player knows)
 local POLYMORPH_SPELLS = {
@@ -25,9 +25,6 @@ local POLYMORPHABLE_TYPES = {
     ["Beast"] = true,
     ["Critter"] = true,
 }
-
--- Saved original target for restoration
-local savedTarget = nil
 
 -- Get list of polymorph spells the player knows
 local function GetKnownPolymorphSpells()
@@ -121,7 +118,7 @@ local function FindAttackableGroupMember()
     return nil, nil
 end
 
--- Send announcement to appropriate channel
+-- Send announcement to appropriate channel (only for MC'd players)
 local function AnnouncePolymorph(targetName)
     local message = "Polymorphing " .. targetName .. "! (Mind Controlled)"
 
@@ -130,8 +127,8 @@ local function AnnouncePolymorph(targetName)
     elseif GetNumPartyMembers() > 0 then
         SendChatMessage(message, "PARTY")
     else
-        -- Solo - just print locally
-        DEFAULT_CHAT_FRAME:AddMessage("|cFF00FFFFPolymorphMacro:|r " .. message)
+        -- Solo - use SAY so nearby players can see
+        SendChatMessage(message, "SAY")
     end
 end
 
@@ -147,31 +144,22 @@ local function DoPolymorphMacro()
         -- Target and cast
         TargetUnit(unit)
         CastSpellByName("Polymorph")
-
-        DEFAULT_CHAT_FRAME:AddMessage("|cFF00FFFFPolymorphMacro:|r Casting Polymorph on MC'd player: " .. name)
         return
     end
 
     -- No attackable group members - check current target
     if UnitExists("target") then
         if not UnitCanAttack("player", "target") then
-            DEFAULT_CHAT_FRAME:AddMessage("|cFF00FFFFPolymorphMacro:|r Target is not attackable.")
             return
         end
 
         if not IsPolymorphable("target") then
-            DEFAULT_CHAT_FRAME:AddMessage("|cFF00FFFFPolymorphMacro:|r Target cannot be polymorphed (wrong creature type).")
             return
         end
 
-        -- Cast random polymorph on target
+        -- Cast random polymorph on target (no announcement)
         local spell = GetRandomPolymorphSpell()
         CastSpellByName(spell)
-
-        local targetName = UnitName("target") or "Unknown"
-        DEFAULT_CHAT_FRAME:AddMessage("|cFF00FFFFPolymorphMacro:|r Casting " .. spell .. " on " .. targetName)
-    else
-        DEFAULT_CHAT_FRAME:AddMessage("|cFF00FFFFPolymorphMacro:|r No target selected and no attackable group members found.")
     end
 end
 
@@ -188,12 +176,9 @@ frame:SetScript("OnEvent", function()
     SLASH_POLYMORPHMACRO1 = "/polymorphmacro"
     SLASH_POLYMORPHMACRO2 = "/polymc"
     SlashCmdList["POLYMORPHMACRO"] = SlashCmdHandler
-
-    -- Initialization message
-    DEFAULT_CHAT_FRAME:AddMessage("|cFF00FFFFPolymorphMacro|r loaded. Use |cFFFFFF00/polymc|r or |cFFFFFF00/polymorphmacro|r")
 end)
 
 -- Export for external use
-PolymorphMacro.Execute = DoPolymorphMacro
-PolymorphMacro.GetKnownPolymorphSpells = GetKnownPolymorphSpells
-PolymorphMacro.FindAttackableGroupMember = FindAttackableGroupMember
+Polymorph1701.Execute = DoPolymorphMacro
+Polymorph1701.GetKnownPolymorphSpells = GetKnownPolymorphSpells
+Polymorph1701.FindAttackableGroupMember = FindAttackableGroupMember

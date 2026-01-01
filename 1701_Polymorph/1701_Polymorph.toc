@@ -1,7 +1,7 @@
 ## Interface: 11200
-## Title: PolymorphMacro
+## Title: 1701_Polymorph
 ## Notes: Smart Polymorph addon - polymorphs attackable raid/party members (MC'd players) or random polymorph on target
 ## Author: Claude
-## Version: 1.0.1
+## Version: 1.1.0
 
-PolymorphMacro.lua
+1701_Polymorph.lua
