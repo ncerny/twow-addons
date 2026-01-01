@@ -1,5 +1,5 @@
 --[[
-    1701_Mounts - Random Mount Selector for WoW 1.12
+    Mounts - Random Mount Selector for WoW 1.12
 
     Usage: /mount [filter]
 
