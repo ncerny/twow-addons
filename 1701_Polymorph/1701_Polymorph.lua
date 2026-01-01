@@ -126,9 +126,6 @@ local function AnnouncePolymorph(targetName)
         SendChatMessage(message, "RAID")
     elseif GetNumPartyMembers() > 0 then
         SendChatMessage(message, "PARTY")
-    else
-        -- Solo - use SAY so nearby players can see
-        SendChatMessage(message, "SAY")
     end
 end
 
