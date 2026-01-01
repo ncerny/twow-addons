@@ -1,6 +1,0 @@
-## Interface: 11200
-## Title: 1701 Addons
-## Notes: A collection of useful addons by Claude
-## Author: Claude
-## Version: 1.0.0
-## OptionalDeps: Polymorph, Mounts
