@@ -65,10 +65,10 @@ end
 -- Get a random polymorph spell from known spells
 local function GetRandomPolymorphSpell()
     local known = GetKnownPolymorphSpells()
-    if #known == 0 then
+    if table.getn(known) == 0 then
         return "Polymorph" -- Fallback to base spell
     end
-    return known[math.random(1, #known)]
+    return known[math.random(1, table.getn(known))]
 end
 
 -- Check if a unit is polymorphable (creature type check)
@@ -180,13 +180,18 @@ local function SlashCmdHandler(msg)
     DoPolymorphMacro()
 end
 
--- Register slash commands
-SLASH_POLYMORPHMACRO1 = "/polymorphmacro"
-SLASH_POLYMORPHMACRO2 = "/polymc"
-SlashCmdList["POLYMORPHMACRO"] = SlashCmdHandler
+-- Create addon frame for event handling
+local frame = CreateFrame("Frame")
+frame:RegisterEvent("VARIABLES_LOADED")
+frame:SetScript("OnEvent", function()
+    -- Register slash commands on VARIABLES_LOADED to ensure proper initialization
+    SLASH_POLYMORPHMACRO1 = "/polymorphmacro"
+    SLASH_POLYMORPHMACRO2 = "/polymc"
+    SlashCmdList["POLYMORPHMACRO"] = SlashCmdHandler
 
--- Initialization message
-DEFAULT_CHAT_FRAME:AddMessage("|cFF00FFFFPolymorphMacro|r loaded. Use |cFFFFFF00/polymc|r or |cFFFFFF00/polymorphmacro|r")
+    -- Initialization message
+    DEFAULT_CHAT_FRAME:AddMessage("|cFF00FFFFPolymorphMacro|r loaded. Use |cFFFFFF00/polymc|r or |cFFFFFF00/polymorphmacro|r")
+end)
 
 -- Export for external use
 PolymorphMacro.Execute = DoPolymorphMacro
