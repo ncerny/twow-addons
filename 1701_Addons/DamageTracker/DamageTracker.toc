@@ -2,6 +2,7 @@
 ## Title: 1701 Addons - DamageTracker
 ## Notes: Tracks damage, hits, misses, and resists for gear comparison
 ## Author: Claude
-## Version: 1.0.0
+## Version: 1.1.0
+## SavedVariables: DamageTrackerDB
 
 DamageTracker.lua
