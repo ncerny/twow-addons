@@ -96,7 +96,10 @@ end
 local function GetEligibleMembers()
     local eligible = {}
 
-    -- Make sure offline members are shown in the roster
+    -- Save the current show offline setting
+    local previousShowOffline = GetGuildRosterShowOffline()
+
+    -- Temporarily show offline members to scan all guild members
     SetGuildRosterShowOffline(true)
 
     local numMembers = GetNumGuildMembers()
@@ -107,6 +110,9 @@ local function GetEligibleMembers()
             table.insert(eligible, memberInfo)
         end
     end
+
+    -- Restore the previous show offline setting
+    SetGuildRosterShowOffline(previousShowOffline)
 
     return eligible
 end
