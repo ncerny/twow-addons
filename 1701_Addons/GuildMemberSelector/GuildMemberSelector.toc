@@ -1,0 +1,7 @@
+## Interface: 11200
+## Title: 1701 Addons - Guild Member Selector
+## Notes: Randomly selects a guild member who has been online within the last 5 days
+## Author: Claude
+## Version: 1.0.0
+
+GuildMemberSelector.lua
